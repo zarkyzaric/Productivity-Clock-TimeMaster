@@ -7,15 +7,17 @@ os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 END_mp3 = 'bell.wav'
 BACKGROUND_mp3='background.mp3'
+# if not os.path.exists(os.path.join(os.getcwd(),BACKGROUND_mp3)):
 if not os.path.exists(BACKGROUND_mp3):
     BACKGROUND_mp3 = 'brown_noise.mp3'
 def countdown_timer(total_time,END_mp3=END_mp3,BACKGROUND_mp3=BACKGROUND_mp3):
     pygame.mixer.init()
     # Load beep sound
     end_sound = pygame.mixer.Sound(END_mp3)
+    reloop = pygame.mixer.Sound(BACKGROUND_mp3)
     pygame.mixer.music.load(BACKGROUND_mp3)
-    pygame.mixer.music.play(loops=-1)  # Play in an infinite loop)
-
+    pygame.mixer.music.play(loops=-1)  # Play in an infinite loop
+    reloop.play(loops=-1)
     half_time = total_time / 2
     pause_duration = random.uniform(0,half_time)
     # print(f'pause duration = {oause_duration}')
