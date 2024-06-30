@@ -6,8 +6,9 @@ import pygame
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 END_mp3 = 'bell.wav'
-BACKGROUND_mp3='brown_noise.mp3'
-
+BACKGROUND_mp3='background.mp3'
+if not os.path.exists(BACKGROUND_mp3):
+    BACKGROUND_mp3 = 'brown_noise.mp3'
 def countdown_timer(total_time,END_mp3=END_mp3,BACKGROUND_mp3=BACKGROUND_mp3):
     pygame.mixer.init()
     # Load beep sound
