@@ -41,15 +41,39 @@ def countdown_timer(total_time,END_mp3=END_mp3,BACKGROUND_mp3=BACKGROUND_mp3):
         if elapsed_time >= freeze_time and WAS_PAUSED == False:
             # print(f"\nClock frozen for {pause_duration:.2f} seconds.")
             time.sleep(pause_duration)
-            # remaining_time = pause_duration
             WAS_PAUSED = True
 
     print("\nTime's up!")
     end_sound.play()
     
-    time.sleep(2.5)  # Ensure beep sound plays before the script end
+    time.sleep(2.5)  # Ensure beep sound plays before the script ends
+#---------------------------------------------------------------------------------
+import sys
+import re
 
+if len(sys.argv) == 2: # for one string arg
+    args = [arg for arg in sys.argv[1].split()]
+elif 2 < len(sys.argv) <= 4: # for multi string args
+    args = [arg for arg in sys.argv[1:]]
 
-# Example usage
-total_time = int(input("Enter the total countdown time in seconds: "))
-countdown_timer(total_time)
+SECONDS,MINUTES,HOURS = 0,0,0
+
+for arg in args:
+    if 's' in arg:
+        SECONDS = int(arg.replace('s', '')) 
+    elif 'm' in arg:
+        MINUTES = int(arg.replace('m', ''))
+    elif 'h' in arg:
+        HOURS = int(arg.replace('h', ''))
+    else:
+        if SECONDS == 0:
+            SECONDS = int(arg)
+        elif MINUTES == 0:
+            MINUTES = int(arg)
+        elif HOURS == 0:
+            HOURS = int(arg)
+
+T = SECONDS + MINUTES * 60 + HOURS * 3600 # print(T)
+
+# Start
+countdown_timer(T)
